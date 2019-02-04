@@ -13,6 +13,7 @@ namespace cg_blocks;
  * @package Gutenberg Contact Card Block
  */
 class Register_Blocks {
+
 	/**
 	 * Constructor function.
 	 */
@@ -23,7 +24,9 @@ class Register_Blocks {
 			// Gutenberg is not active.
 			return;
 		}
+
 		add_action( 'init', array( $this, 'load_textdomain' ) );
+		add_action( 'init', array( $this, 'enqueue_blocks_scripts' ) );
 	}
 
 	/**
@@ -87,5 +90,4 @@ class Register_Blocks {
 			wp_set_script_translations( 'cg-block-editor-js', 'cg-blocks' );
 		}
 	}
-
 }
