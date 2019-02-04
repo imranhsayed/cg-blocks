@@ -1,0 +1,9 @@
+.phpintel
+.idea/
+*.log
+npm-debug.log
+node_modules
+.DS_Store
+**/.DS_Store
+*.map
+Thumbs.db
