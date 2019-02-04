@@ -15,3 +15,6 @@
  */
 
 defined( 'ABSPATH' ) || exit;
+
+define( 'CB_PLUGIN_URL', plugins_url( 'cg-blocks' ) );
+define( 'CB_PLUGIN_DIR_PATH', plugin_dir_path( __FILE__ ) );
