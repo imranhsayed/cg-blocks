@@ -17,6 +17,16 @@ registerBlockType(
 		icon: 'index-card',
 		category: 'layout',
 		attributes: {
+			title: {
+				type: 'array',
+				source: 'children',
+				selector: '.cg-title',
+			},
+			subtitle: {
+				type: 'array',
+				source: 'children',
+				selector: '.cg-subtitle'
+			},
 			mediaID: {
 				type: 'number',
 			},
@@ -25,16 +35,73 @@ registerBlockType(
 				source: 'attribute',
 				selector: 'img',
 				attribute: 'src',
-			}
+			},
+			description: {
+				type: 'array',
+				source: 'children',
+				selector: '.cg-description',
+			},
+			twitterLink: {
+				type: 'array',
+				source: 'children',
+				selector: '.twitter-link',
+			},
+			facebookLink: {
+				type: 'array',
+				source: 'children',
+				selector: '.facebook-link',
+			},
+			emailAddress: {
+				type: 'array',
+				source: 'children',
+				selector: '.email-address',
+			},
 		},
 		edit: ( props ) => {
 			const {
 				className,
 				attributes: {
+					title,
+					subtitle,
 					mediaID,
 					mediaURL,
+					description,
+					twitterLink,
+					facebookLink,
+					emailAddress
 				},
+				setAttributes,
 			} = props;
+			const onChangeTitle = ( value ) => {
+				setAttributes( { title: value } );
+			};
+
+			const onChangeSubTitle = ( value ) => {
+				setAttributes( { subtitle: value } );
+			};
+
+			const onSelectImage = ( media ) => {
+				setAttributes( {
+					mediaURL: media.url,
+					mediaID: media.id,
+				} );
+			};
+
+			const onChangeDescription = ( value ) => {
+				setAttributes( { description: value } );
+			};
+
+			const onChangeTwitterLink = ( value ) => {
+				setAttributes( { twitterLink: value } );
+			};
+
+			const onChangeFacebookLink = ( value ) => {
+				setAttributes( { facebookLink: value } );
+			};
+
+			const onChangeEmailAddress = ( value ) => {
+				setAttributes( { emailAddress: value } );
+			};
 
 			return (
 				<div className={ className }>
@@ -50,6 +117,58 @@ registerBlockType(
 							) }
 						/>
 					</div>
+					<RichText
+						tagName="h4"
+						placeholder={ __( 'Name', 'cg-blocks' ) }
+						value={ title }
+						onChange={ onChangeTitle }
+						className="cg-title"
+					/>
+					<RichText
+						tagName="p"
+						placeholder={ __( 'Subtitle', 'cg-blocks' ) }
+						value={ subtitle }
+						onChange={ onChangeSubTitle }
+						className="cg-subtitle"
+					/>
+					<RichText
+						tagName="div"
+						multiline="p"
+						placeholder={ __( 'Description', 'cg-blocks' ) }
+						value={ description }
+						onChange={ onChangeDescription }
+						className="cg-description"
+					/>
+					<div className="cg-twitter-container">
+						<i className="fab fa-twitter"/>
+						<RichText
+							tagName="p"
+							placeholder={ __( 'Enter twitter link', 'cg-blocks' ) }
+							value={ twitterLink }
+							onChange={ onChangeTwitterLink }
+							className="twitter-link"
+						/>
+					</div>
+					<div className="cg-facebook-container">
+						<i className="fab fa-facebook"/>
+						<RichText
+							tagName="p"
+							placeholder={ __( 'Enter facebook link', 'cg-blocks' ) }
+							value={ facebookLink }
+							onChange={ onChangeFacebookLink }
+							className="facebook-link"
+						/>
+					</div>
+					<div className="cg-email-container">
+						<i className="fas fa-envelope"/>
+						<RichText
+							tagName="p"
+							placeholder={ __( 'Enter email link', 'cg-blocks' ) }
+							value={ emailAddress }
+							onChange={ onChangeEmailAddress }
+							className="email-address"
+						/>
+					</div>
 				</div>
 			);
 		},
@@ -58,7 +177,13 @@ registerBlockType(
 			const {
 				className,
 				attributes: {
+					title,
+					subtitle,
 					mediaURL,
+					description,
+					twitterLink,
+					facebookLink,
+					emailAddress
 				},
 			} = props;
 
@@ -69,6 +194,29 @@ registerBlockType(
 							<img className="cg-contact-card-image" src={ mediaURL } alt={ __( 'Some Image', 'cg-blocks' ) } />
 						)
 					}
+					<RichText.Content tagName="h2" className="cg-title" value={ title } />
+					<RichText.Content tagName="p" className="cg-subtitle" value={ subtitle } />
+
+					<RichText.Content tagName="div" className="cg-description" value={ description } />
+
+					{ twitterLink && (
+						<div className="cg-twitter-link-container">
+							<i className="fab fa-twitter"/>
+							<RichText.Content tagName="p" className="twitter-link" value={ twitterLink } />
+						</div>
+					) }
+					{ facebookLink && (
+						<div className="cg-facebook-link-container">
+							<i className="fab fa-facebook"/>
+							<RichText.Content tagName="p" className="facebook-link" value={ facebookLink } />
+						</div>
+					) }
+					{ emailAddress && (
+						<div className="cg-email-address-container">
+							<i className="fas fa-envelope"/>
+							<RichText.Content tagName="p" className="email-address" value={ emailAddress } />
+						</div>
+					) }
 				</div>
 			);
 		},

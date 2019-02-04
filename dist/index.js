@@ -89,6 +89,16 @@ registerBlockType('cg-blocks/contact-card-block', {
 	icon: 'index-card',
 	category: 'layout',
 	attributes: {
+		title: {
+			type: 'array',
+			source: 'children',
+			selector: '.cg-title'
+		},
+		subtitle: {
+			type: 'array',
+			source: 'children',
+			selector: '.cg-subtitle'
+		},
 		mediaID: {
 			type: 'number'
 		},
@@ -97,14 +107,71 @@ registerBlockType('cg-blocks/contact-card-block', {
 			source: 'attribute',
 			selector: 'img',
 			attribute: 'src'
+		},
+		description: {
+			type: 'array',
+			source: 'children',
+			selector: '.cg-description'
+		},
+		twitterLink: {
+			type: 'array',
+			source: 'children',
+			selector: '.twitter-link'
+		},
+		facebookLink: {
+			type: 'array',
+			source: 'children',
+			selector: '.facebook-link'
+		},
+		emailAddress: {
+			type: 'array',
+			source: 'children',
+			selector: '.email-address'
 		}
 	},
 	edit: function edit(props) {
 		var className = props.className,
 		    _props$attributes = props.attributes,
+		    title = _props$attributes.title,
+		    subtitle = _props$attributes.subtitle,
 		    mediaID = _props$attributes.mediaID,
-		    mediaURL = _props$attributes.mediaURL;
+		    mediaURL = _props$attributes.mediaURL,
+		    description = _props$attributes.description,
+		    twitterLink = _props$attributes.twitterLink,
+		    facebookLink = _props$attributes.facebookLink,
+		    emailAddress = _props$attributes.emailAddress,
+		    setAttributes = props.setAttributes;
 
+		var onChangeTitle = function onChangeTitle(value) {
+			setAttributes({ title: value });
+		};
+
+		var onChangeSubTitle = function onChangeSubTitle(value) {
+			setAttributes({ subtitle: value });
+		};
+
+		var onSelectImage = function onSelectImage(media) {
+			setAttributes({
+				mediaURL: media.url,
+				mediaID: media.id
+			});
+		};
+
+		var onChangeDescription = function onChangeDescription(value) {
+			setAttributes({ description: value });
+		};
+
+		var onChangeTwitterLink = function onChangeTwitterLink(value) {
+			setAttributes({ twitterLink: value });
+		};
+
+		var onChangeFacebookLink = function onChangeFacebookLink(value) {
+			setAttributes({ facebookLink: value });
+		};
+
+		var onChangeEmailAddress = function onChangeEmailAddress(value) {
+			setAttributes({ emailAddress: value });
+		};
 
 		return wp.element.createElement(
 			'div',
@@ -125,19 +192,105 @@ registerBlockType('cg-blocks/contact-card-block', {
 						);
 					}
 				})
+			),
+			wp.element.createElement(RichText, {
+				tagName: 'h4',
+				placeholder: __('Name', 'cg-blocks'),
+				value: title,
+				onChange: onChangeTitle,
+				className: 'cg-title'
+			}),
+			wp.element.createElement(RichText, {
+				tagName: 'p',
+				placeholder: __('Subtitle', 'cg-blocks'),
+				value: subtitle,
+				onChange: onChangeSubTitle,
+				className: 'cg-subtitle'
+			}),
+			wp.element.createElement(RichText, {
+				tagName: 'div',
+				multiline: 'p',
+				placeholder: __('Description', 'cg-blocks'),
+				value: description,
+				onChange: onChangeDescription,
+				className: 'cg-description'
+			}),
+			wp.element.createElement(
+				'div',
+				{ className: 'cg-twitter-container' },
+				wp.element.createElement('i', { className: 'fab fa-twitter' }),
+				wp.element.createElement(RichText, {
+					tagName: 'p',
+					placeholder: __('Enter twitter link', 'cg-blocks'),
+					value: twitterLink,
+					onChange: onChangeTwitterLink,
+					className: 'twitter-link'
+				})
+			),
+			wp.element.createElement(
+				'div',
+				{ className: 'cg-facebook-container' },
+				wp.element.createElement('i', { className: 'fab fa-facebook' }),
+				wp.element.createElement(RichText, {
+					tagName: 'p',
+					placeholder: __('Enter facebook link', 'cg-blocks'),
+					value: facebookLink,
+					onChange: onChangeFacebookLink,
+					className: 'facebook-link'
+				})
+			),
+			wp.element.createElement(
+				'div',
+				{ className: 'cg-email-container' },
+				wp.element.createElement('i', { className: 'fas fa-envelope' }),
+				wp.element.createElement(RichText, {
+					tagName: 'p',
+					placeholder: __('Enter email link', 'cg-blocks'),
+					value: emailAddress,
+					onChange: onChangeEmailAddress,
+					className: 'email-address'
+				})
 			)
 		);
 	},
 
 	save: function save(props) {
 		var className = props.className,
-		    mediaURL = props.attributes.mediaURL;
+		    _props$attributes2 = props.attributes,
+		    title = _props$attributes2.title,
+		    subtitle = _props$attributes2.subtitle,
+		    mediaURL = _props$attributes2.mediaURL,
+		    description = _props$attributes2.description,
+		    twitterLink = _props$attributes2.twitterLink,
+		    facebookLink = _props$attributes2.facebookLink,
+		    emailAddress = _props$attributes2.emailAddress;
 
 
 		return wp.element.createElement(
 			'div',
 			{ className: className },
-			mediaURL && wp.element.createElement('img', { className: 'cg-contact-card-image', src: mediaURL, alt: __('Some Image', 'cg-blocks') })
+			mediaURL && wp.element.createElement('img', { className: 'cg-contact-card-image', src: mediaURL, alt: __('Some Image', 'cg-blocks') }),
+			wp.element.createElement(RichText.Content, { tagName: 'h2', className: 'cg-title', value: title }),
+			wp.element.createElement(RichText.Content, { tagName: 'p', className: 'cg-subtitle', value: subtitle }),
+			wp.element.createElement(RichText.Content, { tagName: 'div', className: 'cg-description', value: description }),
+			twitterLink && wp.element.createElement(
+				'div',
+				{ className: 'cg-twitter-link-container' },
+				wp.element.createElement('i', { className: 'fab fa-twitter' }),
+				wp.element.createElement(RichText.Content, { tagName: 'p', className: 'twitter-link', value: twitterLink })
+			),
+			facebookLink && wp.element.createElement(
+				'div',
+				{ className: 'cg-facebook-link-container' },
+				wp.element.createElement('i', { className: 'fab fa-facebook' }),
+				wp.element.createElement(RichText.Content, { tagName: 'p', className: 'facebook-link', value: facebookLink })
+			),
+			emailAddress && wp.element.createElement(
+				'div',
+				{ className: 'cg-email-address-container' },
+				wp.element.createElement('i', { className: 'fas fa-envelope' }),
+				wp.element.createElement(RichText.Content, { tagName: 'p', className: 'email-address', value: emailAddress })
+			)
 		);
 	}
 });
