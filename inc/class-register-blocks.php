@@ -13,5 +13,15 @@ namespace cg_blocks;
  * @package Gutenberg Contact Card Block
  */
 class Register_Blocks {
+	/**
+	 * Constructor function.
+	 */
+	public function __construct() {
 
+		if ( ! function_exists( 'register_block_type' ) ) {
+
+			// Gutenberg is not active.
+			return;
+		}
+	}
 }
