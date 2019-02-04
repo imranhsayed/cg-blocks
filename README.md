@@ -17,6 +17,7 @@ You can add a card called Contact card where you can add your image, description
 ## What is included in this plugin ?
 
 - The plugin uses ReactJS & ESNext for creating custom gutenberg block, along with PHP's OOP concept
+- It uses Webpack to bundle all of its dependencies into one file index.js
 - Has separate stylesheet for front-end & editor.
 - Linting Tools used:
 - `ESLINT` coding standard configuration.
