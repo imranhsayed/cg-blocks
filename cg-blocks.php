@@ -19,6 +19,7 @@ defined( 'ABSPATH' ) || exit;
 define( 'CB_PLUGIN_URL', plugins_url( 'cg-blocks' ) );
 define( 'CB_PLUGIN_DIR_PATH', plugin_dir_path( __FILE__ ) );
 
+
 if ( version_compare( phpversion(), '5.3', '>=' ) ) {
 	require_once 'inc/class-register-blocks.php';
 	/**
