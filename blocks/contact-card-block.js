@@ -42,13 +42,13 @@ registerBlockType(
 				selector: '.cg-description',
 			},
 			twitterLink: {
-				type: 'array',
-				source: 'children',
+				attribute: 'href',
+				source: 'attribute',
 				selector: '.twitter-link',
 			},
 			facebookLink: {
-				type: 'array',
-				source: 'children',
+				attribute: 'href',
+				source: 'attribute',
 				selector: '.facebook-link',
 			},
 			emailAddress: {
@@ -68,7 +68,7 @@ registerBlockType(
 					description,
 					twitterLink,
 					facebookLink,
-					emailAddress
+					emailAddress,
 				},
 				setAttributes,
 			} = props;
@@ -92,11 +92,11 @@ registerBlockType(
 			};
 
 			const onChangeTwitterLink = ( value ) => {
-				setAttributes( { twitterLink: value } );
+				props.setAttributes( { twitterLink: value } );
 			};
 
 			const onChangeFacebookLink = ( value ) => {
-				setAttributes( { facebookLink: value } );
+				props.setAttributes( { facebookLink: value } );
 			};
 
 			const onChangeEmailAddress = ( value ) => {
@@ -142,7 +142,7 @@ registerBlockType(
 					<div className="cg-twitter-container">
 						<i className="fab fa-twitter"/>
 						<RichText
-							tagName="p"
+							format="string"
 							placeholder={ __( 'Enter twitter link', 'cg-blocks' ) }
 							value={ twitterLink }
 							onChange={ onChangeTwitterLink }
@@ -152,7 +152,7 @@ registerBlockType(
 					<div className="cg-facebook-container">
 						<i className="fab fa-facebook"/>
 						<RichText
-							tagName="p"
+							format="string"
 							placeholder={ __( 'Enter facebook link', 'cg-blocks' ) }
 							value={ facebookLink }
 							onChange={ onChangeFacebookLink }
@@ -202,19 +202,19 @@ registerBlockType(
 					{ twitterLink && (
 						<div className="cg-twitter-link-container">
 							<i className="fab fa-twitter"/>
-							<RichText.Content tagName="p" className="twitter-link" value={ twitterLink } />
+							<a href={twitterLink} className="twitter-link">{twitterLink}</a>
 						</div>
 					) }
 					{ facebookLink && (
 						<div className="cg-facebook-link-container">
 							<i className="fab fa-facebook"/>
-							<RichText.Content tagName="p" className="facebook-link" value={ facebookLink } />
+							<a href={facebookLink} className="facebook-link">{facebookLink}</a>
 						</div>
 					) }
 					{ emailAddress && (
 						<div className="cg-email-address-container">
 							<i className="fas fa-envelope"/>
-							<RichText.Content tagName="p" className="email-address" value={ emailAddress } />
+							<RichText.Content tagName="p" href={ emailAddress } className="email-address" value={ emailAddress } />
 						</div>
 					) }
 				</div>

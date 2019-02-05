@@ -114,13 +114,13 @@ registerBlockType('cg-blocks/contact-card-block', {
 			selector: '.cg-description'
 		},
 		twitterLink: {
-			type: 'array',
-			source: 'children',
+			attribute: 'href',
+			source: 'attribute',
 			selector: '.twitter-link'
 		},
 		facebookLink: {
-			type: 'array',
-			source: 'children',
+			attribute: 'href',
+			source: 'attribute',
 			selector: '.facebook-link'
 		},
 		emailAddress: {
@@ -162,11 +162,11 @@ registerBlockType('cg-blocks/contact-card-block', {
 		};
 
 		var onChangeTwitterLink = function onChangeTwitterLink(value) {
-			setAttributes({ twitterLink: value });
+			props.setAttributes({ twitterLink: value });
 		};
 
 		var onChangeFacebookLink = function onChangeFacebookLink(value) {
-			setAttributes({ facebookLink: value });
+			props.setAttributes({ facebookLink: value });
 		};
 
 		var onChangeEmailAddress = function onChangeEmailAddress(value) {
@@ -220,7 +220,7 @@ registerBlockType('cg-blocks/contact-card-block', {
 				{ className: 'cg-twitter-container' },
 				wp.element.createElement('i', { className: 'fab fa-twitter' }),
 				wp.element.createElement(RichText, {
-					tagName: 'p',
+					format: 'string',
 					placeholder: __('Enter twitter link', 'cg-blocks'),
 					value: twitterLink,
 					onChange: onChangeTwitterLink,
@@ -232,7 +232,7 @@ registerBlockType('cg-blocks/contact-card-block', {
 				{ className: 'cg-facebook-container' },
 				wp.element.createElement('i', { className: 'fab fa-facebook' }),
 				wp.element.createElement(RichText, {
-					tagName: 'p',
+					format: 'string',
 					placeholder: __('Enter facebook link', 'cg-blocks'),
 					value: facebookLink,
 					onChange: onChangeFacebookLink,
@@ -277,19 +277,27 @@ registerBlockType('cg-blocks/contact-card-block', {
 				'div',
 				{ className: 'cg-twitter-link-container' },
 				wp.element.createElement('i', { className: 'fab fa-twitter' }),
-				wp.element.createElement(RichText.Content, { tagName: 'p', className: 'twitter-link', value: twitterLink })
+				wp.element.createElement(
+					'a',
+					{ href: twitterLink, className: 'twitter-link' },
+					twitterLink
+				)
 			),
 			facebookLink && wp.element.createElement(
 				'div',
 				{ className: 'cg-facebook-link-container' },
 				wp.element.createElement('i', { className: 'fab fa-facebook' }),
-				wp.element.createElement(RichText.Content, { tagName: 'p', className: 'facebook-link', value: facebookLink })
+				wp.element.createElement(
+					'a',
+					{ href: facebookLink, className: 'facebook-link' },
+					facebookLink
+				)
 			),
 			emailAddress && wp.element.createElement(
 				'div',
 				{ className: 'cg-email-address-container' },
 				wp.element.createElement('i', { className: 'fas fa-envelope' }),
-				wp.element.createElement(RichText.Content, { tagName: 'p', className: 'email-address', value: emailAddress })
+				wp.element.createElement(RichText.Content, { tagName: 'p', href: emailAddress, className: 'email-address', value: emailAddress })
 			)
 		);
 	}
