@@ -36,9 +36,11 @@
 	margin: 0;
 }
 
-.cg-twitter-link-container .twitter-link,
-.cg-facebook-link-container .facebook-link,
-.cg-email-address-container .email-address {
+.entry .cg-twitter-link-container .twitter-link,
+.entry .cg-facebook-link-container .facebook-link,
+.entry .cg-email-address-container .email-address {
+	color: #1b1b1b;
 	display: inline-block;
 	margin: 0 1rem;
+	text-decoration: none;
 }
