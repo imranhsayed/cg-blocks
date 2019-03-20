@@ -8,7 +8,7 @@ You can add a card called Contact card where you can add your image, description
 
 ## Installation
 
-1. Download the zipped plugin. Unzip the plugin. Rename the plugin directory from 'cg-blocks-master' to 'cg-blocks'.
+1. Download the zipped plugin. Unzip the plugin. Rename the plugin directory from `cg-blocks-master` to `cg-blocks`.
    Zip the renamed plugin directory
 2. Navigate to the __Plugins > Add new__ screen in your WordPress administrative dashboard.
 3. Click __Add New__ at the top of the page.
@@ -18,7 +18,7 @@ You can add a card called Contact card where you can add your image, description
 
    or,
    Go to your plugin directory from terminal and Clone this repo in wp-content/plugins directory `git clone https://github.com/imranhsayed/cg-blocks`
-   And then activate it from __Plugins screen in your WordPress administrative dashboard.
+   And then activate it from __Plugins__ screen in your WordPress administrative dashboard.
 6. Thats it!
 
 ## What is included in this plugin ?
