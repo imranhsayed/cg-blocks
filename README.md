@@ -6,7 +6,7 @@ You can add a card called Contact card where you can add your image, description
 ## Installation
 
 1. Download the zipped plugin or,
-   Clone this repo in wp-content/plugins directory `git clone https://github.com/imranhsayed/gutenberg-contact-card-block`
+   Clone this repo in wp-content/plugins directory `git clone https://github.com/imranhsayed/cg-blocks`
 2. Navigate to the __Plugins > Add new__ screen in your WordPress administrative dashboard.
 3. Click __Add New__ at the top of the page.
 3. Click __Upload Plugin__ at the top of the page.
