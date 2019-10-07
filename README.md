@@ -1,7 +1,7 @@
 ## Description
 
 This plugin adds a simple block in the Gutenberg editor of your WordPress dashboard.
-You can add a card called Contact card where you can add your image, description, contact email and social links
+You can add a card called Contact card where you can add your image, description, contact email and social links.
 
 ## Plugin Demo
 ![](cg-blocks.gif)
